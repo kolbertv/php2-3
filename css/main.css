@@ -1,0 +1,42 @@
+body {
+
+}
+
+
+.gallery {
+    margin: 0 auto;
+    border: 1px solid gray;
+    width: 400px;
+    /*height: 600px;*/
+
+
+}
+
+.gallery__header {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.gallery__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+
+.galery__item {
+    width: 180px;
+    height: 180px;
+    border: 1px solid red;
+    margin-bottom: 20px;
+}
+
+.gallery__img {
+    width: 180px;
+    height: 180px;
+}
+
+.gallery__bigImg {
+
+    width: 400px;
+}

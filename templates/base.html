@@ -1,0 +1,19 @@
+{{ include('head.html') }}
+
+<main>
+
+    {% if page_name == 'index' %}
+
+    <p>крутой сайт</p>
+
+    {{ include('gallery.html') }}
+
+    {% elseif 'good' %}
+
+    {{include('itempage.html')}}
+
+    {% endif %}
+
+</main>
+
+{{ include('footer.html') }}

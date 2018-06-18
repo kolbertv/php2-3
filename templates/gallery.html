@@ -1,0 +1,14 @@
+<div class="gallery">
+
+    <p class="gallery__header">Галерея</p>
+    <div class="gallery__wrapper">
+
+        {% for item in img_array %}
+
+        <div class="galery__item"><a href="good/{{item.url}}"><img class="gallery__img" src="../img/small/{{item.img_url}}" alt=""></a></div>
+
+        {% endfor %}
+    </div>
+
+
+</div>
