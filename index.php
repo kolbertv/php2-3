@@ -1,8 +1,11 @@
 <?
-require_once './vendor/autoload.php';
 
+//session_start();
+
+require_once './vendor/autoload.php';
 $loader = new Twig_Loader_Filesystem('templates');
 $twig = new Twig_Environment($loader);
+
 
 $url_array = explode("/", $_SERVER['REQUEST_URI']);
 if ($url_array[1] == "") {
@@ -10,6 +13,11 @@ if ($url_array[1] == "") {
 } else {
     $page_name = $url_array[1];
     $good_name = $url_array[2];
+}
+
+$rawData = file_get_contents("php://input");
+if (isset($rawData)) {
+    $jsonDecode = json_decode($rawData);
 }
 
 
@@ -36,13 +44,46 @@ if ($good_name != null) {
 }
 
 
-echo $twig->render('base.html', array(
-    'title' => 'Сайт на твиге',
-    'page_name' => $page_name,
-    'good_name' => $good_id,
-    'img_path' => $img_path,
-    'img_array' => $imageArray,
-));
+$jsonMethod = $jsonDecode->{'method'};
+$dataSetM = $jsonDecode->{'m'};
+$dataSetN = $jsonDecode->{'n'};
+//echo $jsonMethod;
+//echo $dataSetM;
+//echo $dataSetN;
+
+
+
+if (!$jsonMethod == ' ajax') {
+
+    echo $twig->render('base.html', array(
+        'title' => 'Сайт на твиге',
+        'page_name' => $page_name,
+        'good_name' => $good_id,
+        'img_path' => $img_path,
+        'img_array' => $imageArray,
+        'n'=> 2,
+        'm'=> 0,
+    ));
+
+} else {
+
+//    ob_start();
+
+    $template = $twig->load('gallery.html');
+    echo $template->renderBlock('galleryItem', array(
+        'n'=> $dataSetN,
+        'm'=> $dataSetM,
+        'img_path' => $img_path,
+        'img_array' => $imageArray,
+    ));
+
+//    $str = ob_get_contents();
+//    ob_end_clean();
+//    echo ($str);
+
+}
+
+
 
 //echo $page_name.'<br>';
 ////echo $img_path.'<br>';

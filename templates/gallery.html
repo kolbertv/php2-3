@@ -1,22 +1,14 @@
 <div class="gallery">
-
     <p class="gallery__header">Галерея</p>
     <div class="gallery__wrapper" id="gallery__wrapper">
 
-        {% set n = 6 %}
-        {% for item in img_array|slice(0, n) %}
-
+        {% block galleryItem %}
+        {% for item in img_array|slice(m, n)  if item %}
         <div class="galery__item"><a href="good/{{item.url}}"><img class="gallery__img" src="../img/small/{{item.img_url}}" alt=""></a></div>
         {% endfor %}
-
-
+        {% endblock %}
     </div>
 
-
+    <button id="moreButton" onclick="moreButton()" data-m="0" data-n="2">Вывести больше картинок</button>
+    <input type="text">
 </div>
-
-<script>
-    let a = document.getElementById('gallery__wrapper');
-    let butn = "<button>Открыть больше картинок</button>";
-    a.innerHTML=a.innerHTML + butn;
-</script>
